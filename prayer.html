@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(45deg, rgb(1, 68, 1), rgb(2, 128, 2));
+        font-family: "Reem Kufi", sans-serif;
+        direction: rtl;
+      }
+      #cityname {
+        font-weight: 400;
+        font-size: 70px;
+        color: whitesmoke;
+        margin-right: 40px;
+      }
+      #date {
+        font-weight: 100;
+        color: whitesmoke;
+        font-size: 30px;
+        margin-right: 40px;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 0px;
+      }
+      .card {
+        width: 12%;
+        height: 95%;
+        background-color: rgb(196, 231, 196);
+        font-size: 20px;
+        box-shadow: 0px 10px 5px rgb(0 0 0 / 30%);
+      }
+      .header {
+        background: linear-gradient(45deg, rgb(20, 165, 20), rgb(51, 247, 51));
+        color: white;
+        padding: 5px;
+      }
+      .header h1 {
+        font-weight: 400;
+      }
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="height: 10vh">
+      <!--city name-->
+      <div id="cityname">البحر الاحمر</div>
+      <!--//city name//-->
+
+      <!-- date-->
+      <div>
+        <h5 id="date">الجمعة 24نوفمبر</h5>
+      </div>
+      <!-- //date//-->
+
+      <hr style="margin: 10px 35px; border-color: rgb(102, 201, 102)" />
+
+      <!--prayer timings-->
+      <div
+        class="center"
+        style="height: 200px; margin-top: 30px; justify-content: space-around"
+      >
+        <div class="card">
+          <!--the pray head-->
+          <div class="header">
+            <h1>الفجر</h1>
+          </div>
+          <!--//the pray head//-->
+
+          <!-- body-->
+          <div class="body center" style="height: 80%">
+            <h1 class="time" id="fajrtime">5:00</h1>
+          </div>
+          <!-- //body//-->
+        </div>
+
+        <div class="card">
+          <!--the pray head-->
+          <div class="header">
+            <h1>الشروق</h1>
+          </div>
+          <!--//the pray head//-->
+
+          <!-- body-->
+          <div class="body center" style="height: 80%">
+            <h1 class="time" id="sunrisetime">5:00</h1>
+          </div>
+          <!-- //body//-->
+        </div>
+
+        <div class="card">
+          <!--the pray head-->
+          <div class="header">
+            <h1>الظهر</h1>
+          </div>
+          <!--//the pray head//-->
+
+          <!-- body-->
+          <div class="body center" style="height: 80%">
+            <h1 class="time" id="dhurtime">5:00</h1>
+          </div>
+          <!-- //body//-->
+        </div>
+
+        <div class="card">
+          <!--the pray head-->
+          <div class="header">
+            <h1>العصر</h1>
+          </div>
+          <!--//the pray head//-->
+
+          <!-- body-->
+          <div class="body center" style="height: 80%">
+            <h1 class="time" id="asrtime">5:00</h1>
+          </div>
+          <!-- //body//-->
+        </div>
+
+        <div class="card">
+          <!--the pray head-->
+          <div class="header">
+            <h1>المغرب</h1>
+          </div>
+          <!--//the pray head//-->
+
+          <!-- body-->
+          <div class="body center" style="height: 80%">
+            <h1 class="time" id="sunsettime">5:00</h1>
+          </div>
+          <!-- //body//-->
+        </div>
+
+        <div class="card">
+          <!--the pray head-->
+          <div class="header">
+            <h1>العشاء</h1>
+          </div>
+          <!--//the pray head//-->
+
+          <!-- body-->
+          <div class="body center" style="height: 80%">
+            <h1 class="time" id="ishatime">5:00</h1>
+          </div>
+          <!-- //body//-->
+        </div>
+      </div>
+      <!--//prayer timings//-->
+
+      <!--change city select-->
+      <div class="center" style="margin-top: 45px">
+        <select
+          name=""
+          id="cities-select"
+          style="
+            width: 300px;
+            height: 30px;
+            font-size: 20px;
+            font-family: 'Reem Kufi', sans-serif;
+            background: rgb(21, 245, 21);
+            color: white;
+            border-radius: 20px;
+          "
+        ></select>
+      </div>
+      <!--//change city select//-->
+    </div>
+  </body>
+
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+
+  <script>
+    let cities = [
+      {
+        arabicName: "البحر الاحمر",
+        name: "Al Baḩr al Aḩmar",
+      },
+      { arabicName: "نهر النيل", name: "River Nile" },
+      { arabicName: "كسلا", name: "Kassala" },
+    ];
+    for (let city of cities) {
+      const content = `
+  <option>${city.arabicName}</option>
+  `;
+      document.getElementById("cities-select").innerHTML += content;
+    }
+
+    document
+      .getElementById("cities-select")
+      .addEventListener("change", function () {
+        document.getElementById("cityname").innerHTML = this.value;
+        let cityName = "";
+        for (let city of cities) {
+          if (city.arabicName == this.value) {
+            cityName = city.name;
+          }
+        }
+        getPrayeraTimingOfCity(cityName);
+      });
+    function getPrayeraTimingOfCity(cityName) {
+      let params = {
+        country: "SD",
+        city: cityName, // "Al Baḩr al Aḩmar",
+      };
+      axios
+        .get("http://api.aladhan.com/v1/timingsByCity", {
+          params: params,
+        })
+        .then(function (response) {
+          const timings = response.data.data.timings;
+          console.log(timings);
+
+          document.getElementById("fajrtime").innerHTML = timings.Fajr;
+          document.getElementById("sunrisetime").innerHTML = timings.Sunrise;
+          document.getElementById("dhurtime").innerHTML = timings.Dhuhr;
+          document.getElementById("asrtime").innerHTML = timings.Asr;
+          document.getElementById("sunsettime").innerHTML = timings.Maghrib;
+          document.getElementById("ishatime").innerHTML = timings.Isha;
+          console.log(response.data.data.timings.Fajr);
+
+          const readableDate = response.data.data.date.readable;
+          const weekDay = response.data.data.date.hijri.weekday.ar;
+          const date = weekDay + " " + readableDate;
+          document.getElementById("date").innerHTML = date;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    getPrayeraTimingOfCity("Al Baḩr al Aḩmar");
+  </script>
+</html>
